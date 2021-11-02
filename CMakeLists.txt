@@ -26,17 +26,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
-if(ANDROID)
-    add_library(desktop-hleper SHARED
-      main.cpp
-      qml.qrc
-    )
-else()
-    add_executable(desktop-hleper
-      main.cpp
-      qml.qrc
-    )
-endif()
+add_executable(desktop-hleper
+  main.cpp
+  utils/command_util.cpp
+  utils/command_util.h
+  qml.qrc
+)
 
 target_compile_definitions(desktop-hleper
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
